@@ -9,7 +9,7 @@ All examples are simplified versions of real-world scenarios I’ve worked on or
 
 ## Folders
 
-🔹 `api-tests-postman/` – Example collection with positive and negative scenarios for login and registration.
+🔹 `postman/collections` – Example collections from Postman.
 
 🔹 `test-cases-manual/` – Written test cases in Markdown format, including input data, steps, and expected results.
 
