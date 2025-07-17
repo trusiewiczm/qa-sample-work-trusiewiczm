@@ -1,0 +1,1573 @@
+{
+	"info": {
+		"_postman_id": "20193670-a4da538d-6c84-44cf-842a-56edea0694bd",
+		"name": "ScrumTeam",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "BUGS",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "get all bugs",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e4a0cc59-7ebc-42d6-8ab4-223abc75b8f0",
+										"exec": [
+											"const json = pm.response.json();\r",
+											" \r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Should return non empty list\", function () {\r",
+											"    pm.expect(json).to.not.be.empty;\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-5aeac18b-a508-4aed-8dff-eac45353ea2e",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/bugs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"bugs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get one bug",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e4a0cc59-7ebc-42d6-8ab4-223abc75b8f0",
+										"exec": [
+											"const json = pm.response.json();\r",
+											"\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Should return non empty list\", function () {\r",
+											"    pm.expect(json).to.not.be.empty;\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Should return emploee 1\", function () {\r",
+											"    pm.expect(json.employeeId).to.eql(1);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Should status set to open\", function () {\r",
+											"    pm.expect(json.status).to.eql('open');\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-838eb73f-833d-4534-8f47-04d7725562a9",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/bugs/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"bugs",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get bugs with given text",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "9a7bfbdb-fa7f-499c-92f0-1e4ad7aa79f9",
+										"exec": [
+											"const json = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Should return bugs with text 404\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include('404');\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-8e1c1f74-fda8-4a6f-a9d9-066ec95853c1",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/bugs?q=404",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"bugs"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "404"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "20193670-fbc08326-8131-497b-ab8e-0dbe2c7c55e7"
+				},
+				{
+					"name": "POST",
+					"item": [
+						{
+							"name": "Create new bug",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b13149ae-93f9-4aba-9ce6-948216d67b86",
+										"exec": [
+											"const json = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Should return correct title\", function () {\r",
+											"    pm.expect(json.title).to.eql('test');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Should return status set to in progress\", function () {\r",
+											"    pm.expect(json.status).to.eql('in progress');\r",
+											"});\r",
+											"\r",
+											"pm.globals.set('bugID' , json.id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-825cee33-7f7b-4cd8-93d5-3a8d53a72812",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"test\",\r\n    \"description\": \"When I send a PATH request to /bugs, instead of status code 200, I'm getting 404\",\r\n    \"employeeId\": 1,\r\n    \"status\": \"in progress\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/bugs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"bugs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete existing bug",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c97ea79b-24f2-4ce9-9851-f1efbf733e6e",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-69e03a09-a9e2-4d35-91e9-596ee0dacf31",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/bugs/{{bugID}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"bugs",
+										"{{bugID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "20193670-1c8b038a-c314-47d5-96cf-672e3333c499"
+				},
+				{
+					"name": "PUT",
+					"item": [
+						{
+							"name": "Create new bug to edit",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b13149ae-93f9-4aba-9ce6-948216d67b86",
+										"exec": [
+											"const json = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Should return correct title\", function () {\r",
+											"    pm.expect(json.title).to.eql('test');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Should return status set to in progress\", function () {\r",
+											"    pm.expect(json.status).to.eql('in progress');\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.globals.set('bugID' , json.id)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-5fb995eb-a93c-4069-9abd-17205988531e",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"test\",\r\n    \"description\": \"When I send a PATH request to /bugs, instead of status code 200, I'm getting 404\",\r\n    \"employeeId\": 1,\r\n    \"status\": \"in progress\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/bugs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"bugs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PUT edit bug",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "acf74ae8-95f4-4b30-ada9-e3320f206fed",
+										"exec": [
+											"const json = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status is set to closed\", function () {\r",
+											"    pm.expect(json.status).to.eql('closed');\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-1daffde4-f40a-4bfb-a9ac-71b78ae6127e",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"I don't like to see n/a on as a company details.\",\r\n    \"description\": \"I don't see why we have to show empty company details when emploee type is uop. Can we hide company section?\",\r\n    \"employeeId\": 2,\r\n    \"status\": \"closed\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/bugs/{{bugID}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"bugs",
+										"{{bugID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete existing bug",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c97ea79b-24f2-4ce9-9851-f1efbf733e6e",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-88069d2d-8bb6-4a67-bb39-978ce2c7ea21",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/bugs/{{bugID}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"bugs",
+										"{{bugID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "20193670-7992dd54-9c65-423c-99f1-009a7a5f8806"
+				},
+				{
+					"name": "PATCH",
+					"item": [
+						{
+							"name": "Create new bug to edit",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b13149ae-93f9-4aba-9ce6-948216d67b86",
+										"exec": [
+											"const json = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Should return correct title\", function () {\r",
+											"    pm.expect(json.title).to.eql('test');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Should return status set to in progress\", function () {\r",
+											"    pm.expect(json.status).to.eql('in progress');\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.globals.set('bugID' , json.id)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-ab2d7607-fd43-44c3-ae51-e5708a8a2e53",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"test\",\r\n    \"description\": \"When I send a PATH request to /bugs, instead of status code 200, I'm getting 404\",\r\n    \"employeeId\": 1,\r\n    \"status\": \"in progress\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/bugs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"bugs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PATCH edit bug",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0d02b2ea-4cd7-492a-b57f-d0db723a04c3",
+										"exec": [
+											"const json = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status is set to closed\", function () {\r",
+											"    pm.expect(json.status).to.eql('closed');\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-30f3f049-237b-45d2-a368-3dfbeb4ee52a",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n    \"status\": \"closed\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/bugs/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"bugs",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{bugID}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete existing bug",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c97ea79b-24f2-4ce9-9851-f1efbf733e6e",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-abbe6ca6-99b2-4def-bc65-221d47ce23d3",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/bugs/{{bugID}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"bugs",
+										"{{bugID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "20193670-91a07a92-d97a-48a2-a868-6a1202475a33"
+				},
+				{
+					"name": "DELETE",
+					"item": [
+						{
+							"name": "Create new bug to edit",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b13149ae-93f9-4aba-9ce6-948216d67b86",
+										"exec": [
+											"const json = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Should return correct title\", function () {\r",
+											"    pm.expect(json.title).to.eql('test');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Should return status set to in progress\", function () {\r",
+											"    pm.expect(json.status).to.eql('in progress');\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.globals.set('bugID' , json.id)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-80271520-ee76-4909-87d5-93312b25d76b",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"test\",\r\n    \"description\": \"When I send a PATH request to /bugs, instead of status code 200, I'm getting 404\",\r\n    \"employeeId\": 1,\r\n    \"status\": \"in progress\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/bugs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"bugs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete existing bug",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c97ea79b-24f2-4ce9-9851-f1efbf733e6e",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-32ab2afd-5af8-4fe8-8f9a-2c984c49b5df",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/bugs/{{bugID}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"bugs",
+										"{{bugID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete non existing bug",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "4366eee6-0092-4bb9-bb49-17214454f375",
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-e2b15755-82a6-44ed-a0dc-908d825a0a44",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/bugs/8704",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"bugs",
+										"8704"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "20193670-caa6e867-9dc3-4096-ae75-2349a5440aed"
+				}
+			],
+			"id": "20193670-aecabbe2-10bb-45ff-b79e-767ce4f6b6b0"
+		},
+		{
+			"name": "EMPLOEES",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "get all emploees",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "4bd560d8-ce5f-4e89-800a-fed56bf3a9cd",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-402359c8-8674-42b2-9f36-250014efd5f1",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/employees",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"employees"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get one emploee",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "deac75b6-5b7b-4f54-a9ef-0afa97777c60",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-ed025a57-d0bd-4dd8-89e6-9259f9fefb2c",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Bartek\",\r\n    \"lastName\": \"Czarny\",\r\n    \"username\": \"bodek\",\r\n    \"email\": \"bczarny@testerprogramuje.pl\",\r\n    \"phone\": \"731-111-111\",\r\n    \"website\": \"testerprogramuje.pl\",\r\n    \"role\": \"qa\",\r\n    \"type\": \"b2b\",\r\n    \"address\": {\r\n        \"street\": \"Ul. Sezamkowa\",\r\n        \"suite\": \"8\",\r\n        \"city\": \"Wrocław\",\r\n        \"zipcode\": \"12-123\"\r\n    },\r\n    \"company\": {\r\n        \"companyName\": \"Akademia QA\",\r\n        \"taxNumber\": \"531-1593-430\",\r\n        \"companyPhone\": \"731-111-111\"\r\n    }\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/employees/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"employees",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get emploees with given text",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "936ade94-5685-4e9d-b75c-861be76d1727",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-a24b2532-b55b-43f5-b17e-c517813e3b32",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/employees?q=K3asiea",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"employees"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "K3asiea"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "20193670-38e656b5-6f44-4b5a-9120-13e5e6fd1509"
+				},
+				{
+					"name": "POST",
+					"item": [
+						{
+							"name": "create new emploee",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1e337ce9-85f7-4c07-b34e-645304799d36",
+										"exec": [
+											"const json = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Should return correct username bodek\", function () {\r",
+											"    pm.expect(json.username).to.eql('bodek');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Should return role qa\", function () {\r",
+											"    pm.expect(json.role).to.eql('qa');\r",
+											"});\r",
+											"\r",
+											"pm.globals.set('emploeeID' , json.id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-2e59ea1a-4875-4359-a0fe-fd4ffe2fb1fb",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Bartek\",\r\n    \"lastName\": \"Czarny\",\r\n    \"username\": \"bodek\",\r\n    \"email\": \"bczarny@testerprogramuje.pl\",\r\n    \"phone\": \"731-111-111\",\r\n    \"website\": \"testerprogramuje.pl\",\r\n    \"role\": \"qa\",\r\n    \"type\": \"b2b\",\r\n    \"address\": {\r\n        \"street\": \"Ul. Sezamkowa\",\r\n        \"suite\": \"8\",\r\n        \"city\": \"Wrocław\",\r\n        \"zipcode\": \"12-123\"\r\n    },\r\n    \"company\": {\r\n        \"companyName\": \"Akademia QA\",\r\n        \"taxNumber\": \"531-1593-430\",\r\n        \"companyPhone\": \"731-111-111\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/employees",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"employees"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete emploee",
+							"id": "20193670-65ee9336-0a6e-40b2-8d1e-d6a88458ab89",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/employees/{{emploeeID}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"employees",
+										"{{emploeeID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "20193670-d06174ae-eb8d-48c1-bde9-89d316c72529"
+				},
+				{
+					"name": "PUT",
+					"item": [
+						{
+							"name": "create new emploee",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1e337ce9-85f7-4c07-b34e-645304799d36",
+										"exec": [
+											"const json = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Should return correct username bodek\", function () {\r",
+											"    pm.expect(json.username).to.eql('bodek');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Should return role qa\", function () {\r",
+											"    pm.expect(json.role).to.eql('qa');\r",
+											"});\r",
+											"\r",
+											"pm.globals.set('emploeeID' , json.id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-1bc2eb4f-8352-4436-9bfd-07daeb89b463",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Bartek\",\r\n    \"lastName\": \"Czarny\",\r\n    \"username\": \"bodek\",\r\n    \"email\": \"bczarny@testerprogramuje.pl\",\r\n    \"phone\": \"731-111-111\",\r\n    \"website\": \"testerprogramuje.pl\",\r\n    \"role\": \"qa\",\r\n    \"type\": \"b2b\",\r\n    \"address\": {\r\n        \"street\": \"Ul. Sezamkowa\",\r\n        \"suite\": \"8\",\r\n        \"city\": \"Wrocław\",\r\n        \"zipcode\": \"12-123\"\r\n    },\r\n    \"company\": {\r\n        \"companyName\": \"Akademia QA\",\r\n        \"taxNumber\": \"531-1593-430\",\r\n        \"companyPhone\": \"731-111-111\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/employees",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"employees"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "put existing emploee",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "eb9c96c8-0bab-40ae-9e00-3fa008f509d5",
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Should return user first name: Błażejsdkfsdf\", function () {\r",
+											"    pm.expect(jsonData.firstName).to.eql('Błażejsdkfsdf');\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-7b5c94cc-840c-4ece-b9c6-de2404cfd2b2",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Błażejsdkfsdf\",\r\n    \"lastName\": \"Czarny\",\r\n    \"username\": \"bodek\",\r\n    \"email\": \"bczarny@testerprogramuje.pl\",\r\n    \"phone\": \"731-111-111\",\r\n    \"website\": \"testerprogramuje.pl\",\r\n    \"role\": \"qa\",\r\n    \"type\": \"b2b\",\r\n    \"address\": {\r\n        \"street\": \"Ul. Sezamkowa\",\r\n        \"suite\": \"8\",\r\n        \"city\": \"Wrocław\",\r\n        \"zipcode\": \"12-123\"\r\n    },\r\n    \"company\": {\r\n        \"companyName\": \"Akademia QA\",\r\n        \"taxNumber\": \"531-1593-430\",\r\n        \"companyPhone\": \"731-111-111\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/employees/{{emploeeID}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"employees",
+										"{{emploeeID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete emploee",
+							"id": "20193670-13bffc8b-1a46-40ce-b1a1-728ffdf33c8e",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/employees/{{emploeeID}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"employees",
+										"{{emploeeID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "20193670-7dd818df-c4f5-4250-977c-830933af18e7"
+				},
+				{
+					"name": "PATCH",
+					"item": [
+						{
+							"name": "create new emploe",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1e337ce9-85f7-4c07-b34e-645304799d36",
+										"exec": [
+											"const json = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Should return correct username bodek\", function () {\r",
+											"    pm.expect(json.username).to.eql('bodek');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Should return role qa\", function () {\r",
+											"    pm.expect(json.role).to.eql('qa');\r",
+											"});\r",
+											"\r",
+											"pm.globals.set('emploeeID' , json.id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-fbf1891d-86ed-412d-b6f5-42fe67f11c6f",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Bartek\",\r\n    \"lastName\": \"Czarny\",\r\n    \"username\": \"bodek\",\r\n    \"email\": \"bczarny@testerprogramuje.pl\",\r\n    \"phone\": \"731-111-111\",\r\n    \"website\": \"testerprogramuje.pl\",\r\n    \"role\": \"qa\",\r\n    \"type\": \"b2b\",\r\n    \"address\": {\r\n        \"street\": \"Ul. Sezamkowa\",\r\n        \"suite\": \"8\",\r\n        \"city\": \"Wrocław\",\r\n        \"zipcode\": \"12-123\"\r\n    },\r\n    \"company\": {\r\n        \"companyName\": \"Akademia QA\",\r\n        \"taxNumber\": \"531-1593-430\",\r\n        \"companyPhone\": \"731-111-111\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/employees",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"employees"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "patch existing emploee",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a3499bee-bbcb-40c1-b15c-69474baa8b08",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Should return correct website trucamp.pl\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.website).to.eql(\"trucamp.pl\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-f71a0332-d2c7-4981-997e-d8bd7f97a223",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"website\": \"trucamp.pl\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/employees/{{emploeeID}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"employees",
+										"{{emploeeID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete emploee",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a4680b17-467f-4251-8418-fcb0ac000338",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-a5bb8f7a-3fa7-49f5-9edd-d58a4004887c",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/employees/{{emploeeID}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"employees",
+										"{{emploeeID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "20193670-01ce6c7b-b3f1-46d1-a67d-a0c7e574412a"
+				},
+				{
+					"name": "DELETE",
+					"item": [
+						{
+							"name": "create new emploe",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1e337ce9-85f7-4c07-b34e-645304799d36",
+										"exec": [
+											"const json = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Should return correct username bodek\", function () {\r",
+											"    pm.expect(json.username).to.eql('bodek');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Should return role qa\", function () {\r",
+											"    pm.expect(json.role).to.eql('qa');\r",
+											"});\r",
+											"\r",
+											"pm.globals.set('emploeeID' , json.id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-1a15fe31-9f9e-4828-9814-8fee9a1a315d",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Bartek\",\r\n    \"lastName\": \"Czarny\",\r\n    \"username\": \"bodek\",\r\n    \"email\": \"bczarny@testerprogramuje.pl\",\r\n    \"phone\": \"731-111-111\",\r\n    \"website\": \"testerprogramuje.pl\",\r\n    \"role\": \"qa\",\r\n    \"type\": \"b2b\",\r\n    \"address\": {\r\n        \"street\": \"Ul. Sezamkowa\",\r\n        \"suite\": \"8\",\r\n        \"city\": \"Wrocław\",\r\n        \"zipcode\": \"12-123\"\r\n    },\r\n    \"company\": {\r\n        \"companyName\": \"Akademia QA\",\r\n        \"taxNumber\": \"531-1593-430\",\r\n        \"companyPhone\": \"731-111-111\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/employees",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"employees"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete emploee",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a4680b17-467f-4251-8418-fcb0ac000338",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-2d98efe2-a8af-4772-b8e5-eac993567388",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/employees/{{emploeeID}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"employees",
+										"{{emploeeID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete non existing emploee",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a4680b17-467f-4251-8418-fcb0ac000338",
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-2d44c13b-460b-435a-ac70-335c3facae61",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/employees/{{emploeeID}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"employees",
+										"{{emploeeID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "20193670-f81e4ee8-11be-48eb-977b-371712891885"
+				},
+				{
+					"name": "POST WITH RANDOM DATA",
+					"item": [
+						{
+							"name": "create new emploee",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1e337ce9-85f7-4c07-b34e-645304799d36",
+										"exec": [
+											"const json = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Should return correct username bodek\", function () {\r",
+											"    pm.expect(json.username).to.eql('bodek');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Should return role qa\", function () {\r",
+											"    pm.expect(json.role).to.eql('qa');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Should return correect email\", function () {\r",
+											"    pm.expect(json.email).to.eql(pm.collectionVariables.get('cRandomEmail'));\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Should return correect firstName\", function () {\r",
+											"    pm.expect(json.firstName).to.eql(pm.collectionVariables.get('cRandomFirstName'));\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Should return correect lastName\", function () {\r",
+											"    pm.expect(json.lastName).to.eql(pm.collectionVariables.get('cRandomLastName'));\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Should return correect phone\", function () {\r",
+											"    pm.expect(json.phone).to.eql(pm.collectionVariables.get('cRandomPhoneNumber'));\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Should return correect street\", function () {\r",
+											"    pm.expect(json.address.street).to.eql(pm.collectionVariables.get('cRandomStreetName'));\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "baec0102-6b0e-45fa-913c-ad54c73c033f",
+										"exec": [
+											"pm.collectionVariables.set('cRandomEmail', pm.variables.replaceIn('{{$randomEmail}}'));\r",
+											"pm.collectionVariables.set('cRandomFirstName', pm.variables.replaceIn('{{$randomFirstName}}'));\r",
+											"pm.collectionVariables.set('cRandomLastName', pm.variables.replaceIn('{{$randomLastName}}'));\r",
+											"pm.collectionVariables.set('cRandomPhoneNumber', pm.variables.replaceIn('{{$randomPhoneNumber}}'));\r",
+											"pm.collectionVariables.set('cRandomStreetName', pm.variables.replaceIn('{{$randomStreetName}}'))\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20193670-ab181d6a-be24-4025-935b-48c27f5bb2f7",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"{{cRandomFirstName}}\",\r\n    \"lastName\": \"{{cRandomLastName}}\",\r\n    \"username\": \"bodek\",\r\n    \"email\": \"{{cRandomEmail}}\",\r\n    \"phone\": \"{{cRandomPhoneNumber}}\",\r\n    \"website\": \"testerprogramuje.pl\",\r\n    \"role\": \"qa\",\r\n    \"type\": \"b2b\",\r\n    \"address\": {\r\n        \"street\": \"{{cRandomStreetName}}\",\r\n        \"suite\": \"8\",\r\n        \"city\": \"Wrocław\",\r\n        \"zipcode\": \"12-123\"\r\n    },\r\n    \"company\": {\r\n        \"companyName\": \"Akademia QA\",\r\n        \"taxNumber\": \"531-1593-430\",\r\n        \"companyPhone\": \"731-111-111\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/employees",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"employees"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "20193670-0c2d4e77-07be-4beb-a590-2bce2bc8a954"
+				}
+			],
+			"id": "20193670-9a4941c3-b361-49c4-a728-5d49d72107d6"
+		},
+		{
+			"name": "options test",
+			"item": [
+				{
+					"name": "options",
+					"id": "20193670-a0fee75d-1c5e-44cf-a505-b60ede997247",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "OPTIONS",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "20193670-20b2d241-74c6-409d-9357-7728aa29f19d"
+		}
+	],
+	"variable": [
+		{
+			"key": "cRandomEmail",
+			"value": ""
+		},
+		{
+			"key": "cRandomFirstName",
+			"value": ""
+		},
+		{
+			"key": "cRandomLastName",
+			"value": ""
+		},
+		{
+			"key": "cRandomPhoneNumber",
+			"value": ""
+		},
+		{
+			"key": "cRandomStreetName",
+			"value": ""
+		}
+	]
+}
