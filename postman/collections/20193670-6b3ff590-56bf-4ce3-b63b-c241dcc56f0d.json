@@ -1,0 +1,426 @@
+{
+	"info": {
+		"_postman_id": "20193670-6b3ff590-56bf-4ce3-b63b-c241dcc56f0d",
+		"name": "Postman tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "test",
+			"item": [
+				{
+					"name": "check for non empty status filds",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f5ba4c2c-2d69-4984-8474-30c684e19960",
+								"exec": [
+									"const bugs = pm.response.json();\r",
+									"const _ = require('lodash');\r",
+									"\r",
+									"pm.test(\"Should return list of non empty status fields\", function () {\r",
+									"    _.each(bugs, (bug) => {\r",
+									"        console.log(bug.status);\r",
+									"        pm.expect(bug.status).to.not.be.empty;\r",
+									"    })\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "20193670-196fdb03-258d-4005-9e47-221f90cc35e6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Bartek\",\r\n    \"lastName\": \"Czarny\",\r\n    \"username\": \"bodek\",\r\n    \"email\": \"bczarny@testerprogramuje.pl\",\r\n    \"phone\": \"731-111-111\",\r\n    \"website\": \"testerprogramuje.pl\",\r\n    \"role\": \"qa\",\r\n    \"type\": \"b2b\",\r\n    \"address\": {\r\n        \"street\": \"Ul. Sezamkowa\",\r\n        \"suite\": \"8\",\r\n        \"city\": \"Wrocław\",\r\n        \"zipcode\": \"12-123\"\r\n    },\r\n    \"company\": {\r\n        \"companyName\": \"Akademia QA\",\r\n        \"taxNumber\": \"531-1593-430\",\r\n        \"companyPhone\": \"731-111-111\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/bugs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"bugs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create bug with empty status field",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "10f668fe-f22c-4a21-941b-be5a89c5453c",
+								"exec": [
+									"const json = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.collectionVariables.set('emptyStatusBugID' , json.id)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "20193670-84dfffc6-940c-4368-83b3-3b7f10cd295d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"asdf\",\r\n    \"description\": \"When I send a PATH request to /bugs, instead of status code 200, I'm getting 404\",\r\n    \"employeeId\": 1,\r\n    \"status\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/bugs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"bugs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check for non empty status filds Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f5ba4c2c-2d69-4984-8474-30c684e19960",
+								"exec": [
+									"const bugs = pm.response.json();\r",
+									"const _ = require('lodash');\r",
+									"\r",
+									"pm.test(\"Should return list of non empty status fields\", function () {\r",
+									"    _.each(bugs, (bug) => {\r",
+									"        console.log(bug.status);\r",
+									"        pm.expect(bug.status).to.not.be.empty;\r",
+									"    })\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "20193670-177c3567-bd51-4c41-a53b-58c1e37a955e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Bartek\",\r\n    \"lastName\": \"Czarny\",\r\n    \"username\": \"bodek\",\r\n    \"email\": \"bczarny@testerprogramuje.pl\",\r\n    \"phone\": \"731-111-111\",\r\n    \"website\": \"testerprogramuje.pl\",\r\n    \"role\": \"qa\",\r\n    \"type\": \"b2b\",\r\n    \"address\": {\r\n        \"street\": \"Ul. Sezamkowa\",\r\n        \"suite\": \"8\",\r\n        \"city\": \"Wrocław\",\r\n        \"zipcode\": \"12-123\"\r\n    },\r\n    \"company\": {\r\n        \"companyName\": \"Akademia QA\",\r\n        \"taxNumber\": \"531-1593-430\",\r\n        \"companyPhone\": \"731-111-111\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/bugs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"bugs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete bug with empty status filed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2ab39cbd-22ec-429b-92c8-9d621e61304e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "20193670-0175f5eb-3be5-4b37-95d3-ae9b37c24077",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Bartek\",\r\n    \"lastName\": \"Czarny\",\r\n    \"username\": \"bodek\",\r\n    \"email\": \"bczarny@testerprogramuje.pl\",\r\n    \"phone\": \"731-111-111\",\r\n    \"website\": \"testerprogramuje.pl\",\r\n    \"role\": \"qa\",\r\n    \"type\": \"b2b\",\r\n    \"address\": {\r\n        \"street\": \"Ul. Sezamkowa\",\r\n        \"suite\": \"8\",\r\n        \"city\": \"Wrocław\",\r\n        \"zipcode\": \"12-123\"\r\n    },\r\n    \"company\": {\r\n        \"companyName\": \"Akademia QA\",\r\n        \"taxNumber\": \"531-1593-430\",\r\n        \"companyPhone\": \"731-111-111\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/bugs/{{emptyStatusBugID}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"bugs",
+								"{{emptyStatusBugID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "20193670-61902d7b-80fe-443d-a5e1-b9ba16c018f4"
+		},
+		{
+			"name": "Chai Assertion - examples",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "edba8424-ad77-4d68-b505-2e632f62b268",
+						"exec": [
+							"const json = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"//sprawdzenie poprawności odpowiedzi\r",
+							"pm.test(\"Should reeturn valid response with json body\", function () {\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.not.be.empty;\r",
+							"});\r",
+							"\r",
+							"//sprawdzenie czy response jest tablicą\r",
+							"pm.test(\"Should return response as an array\", () => {\r",
+							"    pm.expect(json).to.be.an(\"array\");\r",
+							"})\r",
+							"\r",
+							"//sprawdzenie dlugości tablicy\r",
+							"pm.test(\"Should return 10 elements in the array\", () => {\r",
+							"    pm.expect(json.length).to.eql(10);\r",
+							"    pm.expect(json).to.have.lengthOf(10);\r",
+							"})\r",
+							"\r",
+							"//sprawdzenie danych obiektu\r",
+							"pm.test(\"Should return username as a non empty string\", () => {\r",
+							"    pm.expect(json[0].username).to.not.be.empty;\r",
+							"    pm.expect(json[0].username).to.be.a(\"string\");\r",
+							"    pm.expect(json[0].username).to.eql(\"Bret\");\r",
+							"})\r",
+							"\r",
+							"//sprawdzenie czy obiekt nie zawiera podanych kluczy\r",
+							"pm.test(\"Should return object without given keys\", () => {\r",
+							"    pm.expect(json[0]).to.not.have.any.keys('password', 'confirmPassword');\r",
+							"})\r",
+							"\r",
+							"//sprawdzenie czy obiekt zawiera podane klucze\r",
+							"pm.test(\"Should return object with given keys\", () => {\r",
+							"    pm.expect(json[0]).to.have.any.keys('username', 'password');\r",
+							"})\r",
+							"\r",
+							"//sprawdzenie czy obiekt zawiera wszystkie podane klucze\r",
+							"pm.test(\"Should return object with given keys\", () => {\r",
+							"    pm.expect(json[0].address.geo).to.have.all.keys('lat', 'lng');\r",
+							"})\r",
+							"\r",
+							"//sprawdzenie czy obiekt zawiera pojedyńczy klucz\r",
+							"pm.test(\"Should return object with given value\", () => {\r",
+							"    pm.expect(json[0].address.geo).to.have.property('lat');\r",
+							"})\r",
+							"\r",
+							"//sprawdzenie czy obiekt zawiera znak @\r",
+							"pm.test(\"Should return email with @ sign\", () => {\r",
+							"    pm.expect(json[0].email).to.be.a('string');\r",
+							"    pm.expect(json[0].email).to.include('@');\r",
+							"})\r",
+							"\r",
+							"//sprawdzenie czy response zawiera podany nagłówek\r",
+							"pm.test(\"Should return header Content-Type\", () => {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"})\r",
+							"\r",
+							"//sprawdzenie czy nagłówek zawiera poprawną wartość\r",
+							"pm.test(\"Should return header Content-Type\", () => {\r",
+							"    const contentType = postman.getResponseHeader(\"Content-Type\")\r",
+							"    pm.expect(contentType).to.include('application/json');\r",
+							"})\r",
+							"\r",
+							"//sprawdzenie czasu odpowiedzi\r",
+							"pm.test(\"Should return response in less than 200ms\", () => {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"})\r",
+							"\r",
+							"//porownanie obiektow\r",
+							"let userA = {\r",
+							"    \"name\": \"Tomek\",\r",
+							"    \"age\": 25\r",
+							"}\r",
+							"\r",
+							"let userB = {\r",
+							"    \"name\": \"Tomek\",\r",
+							"    \"age\": 25\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Should return correct username\", () => {\r",
+							"    pm.expect(userA).to.eql(userB);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Should return correct username\", () => {\r",
+							"    pm.expect(userA).to.equal(userB);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "20193670-313a0886-aa56-4441-bd23-fefacb2d03b8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/users",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lodash - examples",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "649e639c-904f-4103-ae96-66553dba5218",
+						"exec": [
+							"const users = pm.response.json();\r",
+							"const _ = require('lodash');\r",
+							"\r",
+							"\r",
+							"//pętla lodash - _.each\r",
+							"pm.test(\"Should return valid list of emails\", function () {\r",
+							"    _.each(users, (user) => {\r",
+							"        pm.expect(user.email).to.be.a('string');\r",
+							"        pm.expect(user.email).to.include('@');\r",
+							"    })\r",
+							"});\r",
+							"\r",
+							"//pętla lodash - _.each\r",
+							"pm.test(\"Should return list of non empty usernames\", function () {\r",
+							"    _.each(users, (user) => {\r",
+							"        pm.expect(user.username).to.not.be.empty;\r",
+							"    })\r",
+							"});\r",
+							"\r",
+							"//sprawdzanie zagnieżdżonych obiektów - _.map\r",
+							"pm.test(\"Should verify lat list contains a given value\", function () {\r",
+							"    console.log(_.map(users, 'address.geo.lat'));\r",
+							"    pm.expect(_.map(users, 'address.geo.lat')).to.include('-37.3159')\r",
+							"});\r",
+							"\r",
+							"//wyszukiwanie obiektów\r",
+							"pm.test(\"Should find user with given street\", function () {\r",
+							"    const user = _.find(users, {\"address\": {\"street\": \"Douglas Extension\"} })\r",
+							"    pm.expect(user.email).to.eql(\"Nathan@yesenia.net\");\r",
+							"});\r",
+							"\r",
+							"//randomowy element z listy\r",
+							"console.log(_.sample(users))\r",
+							"\r",
+							"//randowmowe liczby\r",
+							"console.log(_.random(10,99))"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "20193670-f41e6f4b-421d-4d0b-8a06-83b241a0689f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/users",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "emptyStatusBugID",
+			"value": ""
+		}
+	]
+}
