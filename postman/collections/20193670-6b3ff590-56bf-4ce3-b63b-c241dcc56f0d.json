@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "exercises",
+			"name": "exercises with Lodash and Chai Assertion",
 			"item": [
 				{
 					"name": "check for non empty status fields",
