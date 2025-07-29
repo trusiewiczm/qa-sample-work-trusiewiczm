@@ -109,7 +109,7 @@
 					"response": []
 				},
 				{
-					"name": "check for non empty status filds",
+					"name": "check for non empty status fields",
 					"event": [
 						{
 							"listen": "test",
