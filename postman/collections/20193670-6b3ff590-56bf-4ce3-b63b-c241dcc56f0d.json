@@ -158,7 +158,7 @@
 					"response": []
 				},
 				{
-					"name": "delete bug with empty status filed",
+					"name": "delete bug with empty status field",
 					"event": [
 						{
 							"listen": "test",
