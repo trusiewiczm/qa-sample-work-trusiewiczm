@@ -9,7 +9,7 @@
 			"name": "exercises",
 			"item": [
 				{
-					"name": "check for non empty status filds",
+					"name": "check for non empty status fields",
 					"event": [
 						{
 							"listen": "test",
