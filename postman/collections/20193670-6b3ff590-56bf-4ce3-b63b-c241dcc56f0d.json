@@ -87,7 +87,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"asdf\",\r\n    \"description\": \"When I send a PATH request to /bugs, instead of status code 200, I'm getting 404\",\r\n    \"employeeId\": 1,\r\n    \"status\": \"\"\r\n}",
+							"raw": "{\r\n    \"title\": \"test bug\",\r\n    \"description\": \"Bug with an empty status field\",\r\n    \"employeeId\": 1,\r\n    \"status\": \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
