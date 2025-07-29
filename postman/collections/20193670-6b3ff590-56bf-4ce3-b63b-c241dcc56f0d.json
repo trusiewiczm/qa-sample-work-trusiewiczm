@@ -202,7 +202,7 @@
 				}
 			],
 			"id": "20193670-61902d7b-80fe-443d-a5e1-b9ba16c018f4",
-			"description": "exercise 1:\n\n- go through all bugs and check if status fild is not empty\n    \n- add bug with empty status field\n    \n- chceck again for bugs with empty status\n    \n- delete bug from p.2\n    \n\nexercise 2:"
+			"description": "exercise 1:\n\n- go through all bugs and check if status fild is not empty\n    \n- add bug with empty status field\n    \n- chceck again for bugs with empty status\n    \n- delete bug from p.2\n    \n\nexercise 2:\n\n- count all bugs\n    \n- add new bug\n    \n- count bugs again and check if number of bugs increased\n    \n- delete bug from p.2"
 		},
 		{
 			"name": "Chai Assertion - examples",
