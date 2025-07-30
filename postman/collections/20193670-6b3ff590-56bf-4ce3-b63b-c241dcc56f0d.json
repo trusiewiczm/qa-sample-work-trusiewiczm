@@ -76,7 +76,9 @@
 									"    pm.response.to.have.status(201);\r",
 									"});\r",
 									"\r",
-									"pm.collectionVariables.set('emptyStatusBugID' , json.id)"
+									"pm.collectionVariables.set('emptyStatusBugID' , json.id)\r",
+									"\r",
+									"pm.expect(json).to.have.lengthOf(pm.collectionVariables.get('numberOfBugs')+1)"
 								],
 								"type": "text/javascript",
 								"packages": {}
