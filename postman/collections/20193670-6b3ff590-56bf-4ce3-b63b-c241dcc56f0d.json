@@ -422,6 +422,10 @@
 		{
 			"key": "emptyStatusBugID",
 			"value": ""
+		},
+		{
+			"key": "numberOfBugs",
+			"value": ""
 		}
 	]
 }
