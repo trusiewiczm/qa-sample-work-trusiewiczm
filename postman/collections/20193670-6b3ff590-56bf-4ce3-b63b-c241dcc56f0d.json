@@ -130,7 +130,7 @@
 									"\r",
 									"pm.test(\"Should return list of non empty status fields\", function () {\r",
 									"    _.each(bugs, (bug) => {\r",
-									"        console.log(bug.status);\r",
+									"//console.log(bug.status);\r",
 									"        pm.expect(bug.status).to.not.be.empty;\r",
 									"    })\r",
 									"});\r",
