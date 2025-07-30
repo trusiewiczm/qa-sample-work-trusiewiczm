@@ -127,7 +127,7 @@
 									"const _ = require('lodash');\r",
 									"var numberOfBugsWithEmptyStatus = 0;\r",
 									"\r",
-									"pm.test(\"Check if one of the bugs has empty status field\", function () {\r",
+									"pm.test(\"Check if one of the bugs has empty status field\", () => {\r",
 									"    _.each(bugs, (bug) => {\r",
 									"        //console.log(bug.status);\r",
 									"        if (bug.status === '') {\r",
