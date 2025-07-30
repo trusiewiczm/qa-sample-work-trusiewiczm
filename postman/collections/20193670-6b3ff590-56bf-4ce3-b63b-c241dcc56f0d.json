@@ -127,7 +127,7 @@
 									"const _ = require('lodash');\r",
 									"var numberOfBugsWithEmptyStatus = 0;\r",
 									"\r",
-									"pm.test(\"Check if one of the bugs has empty status field\", () => {\r",
+									"pm.test(\"Check if one of the bugs has empty status field\", function () {\r",
 									"    _.each(bugs, (bug) => {\r",
 									"        //console.log(bug.status);\r",
 									"        if (bug.status === '') {\r",
@@ -137,9 +137,10 @@
 									"    pm.expect(numberOfBugsWithEmptyStatus).to.be.eql(1);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Check if numer of bugs increased\", () => {\r",
+									"pm.test(\"Check if numer of bugs increased\", function () {\r",
 									"    pm.expect(bugs).to.have.lengthOf(pm.collectionVariables.get('numberOfBugs') + 1)\r",
-									"});"
+									"});\r",
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
